@@ -1,0 +1,28 @@
+
+name: Artifact Management
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+   archive-build-artifacts:
+     runs-on: ubuntu-latest
+     steps:
+       - name: step 1- create a temporary artifact download folder
+         run: mkdir downloads
+         
+       -  name: step 2- add artifact to temp folder
+          run: |
+            cd downloads
+            echo 'alpha' > alpha.html
+            echo 'bravo' > bravo.html
+            echo 'charlie' > charlie.html
+            cd ..
+
+       - name: step 3 - Use the upload artifact Github Action
+         uses: actions/upload-artifact@v2
+         with:
+          name: assets-for-downloads
+          path: do
